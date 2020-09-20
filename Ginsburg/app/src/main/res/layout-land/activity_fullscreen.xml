@@ -63,7 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="40dp">
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp">
 
                 <TextView
                     android:id="@+id/textView4"

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GINSBURG</string>
     <string name="launch_button">GET STARTED</string>
-    <string name="app_description">Images and Quotes\nFrom a Titan</string>
+    <string name="app_description">Quotes from a Titan\n(Picture Book Edition)</string>
     <string name="bio_name">Ruth Bader Ginsburg</string>
 </resources>
