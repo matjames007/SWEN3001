@@ -3,4 +3,11 @@
     <string name="launch_button">GET STARTED</string>
     <string name="app_description">Quotes from a Titan\n(Picture Book Edition)</string>
     <string name="bio_name">Ruth Bader Ginsburg</string>
+    <string name="accessibility_landing_image">Image of Ruth Bader Ginsburg</string>
+    <string name="title_activity_biography_page">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="welcome_text">Welcome!</string>
+    <string name="sample_quote">\"When contemplated in its extreme, almost any power looks dangerous\"</string>
+    <string name="quote_citation">Ruth Bader Ginsburg</string>
 </resources>

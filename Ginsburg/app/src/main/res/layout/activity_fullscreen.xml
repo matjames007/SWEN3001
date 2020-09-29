@@ -32,7 +32,9 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
-            android:layout_height="416dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/accessibility_landing_image"
             app:srcCompat="@drawable/ginsburg_welcome" />
 
         <TextView
@@ -72,8 +74,7 @@
                 android:id="@+id/divider"
                 android:layout_width="80dp"
                 android:layout_height="1dp"
-                android:background="@android:color/background_light"
-                android:paddingLeft="40dp" />
+                android:background="@android:color/background_light" />
 
             <TextView
                 android:id="@+id/textView5"

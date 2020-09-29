@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context=".BiographyPage">
+
+    <LinearLayout
+        android:id="@+id/bio_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appCustomBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/app_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/screen1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp">
+
+            <TextView
+                android:id="@+id/app_quotation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/abhaya_libre"
+                android:paddingTop="40dp"
+                android:paddingBottom="10dp"
+                android:text="@string/sample_quote"
+                android:textColor="@android:color/background_light"
+                android:textSize="36sp" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="60dp"
+                android:layout_height="2dp"
+                android:background="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/source_cite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:text="@string/quote_citation"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:text="NEXT" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

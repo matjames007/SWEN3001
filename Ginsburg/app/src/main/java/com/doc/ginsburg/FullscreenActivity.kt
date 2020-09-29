@@ -2,6 +2,7 @@ package com.doc.ginsburg
 
 import androidx.appcompat.app.AppCompatActivity
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.MotionEvent
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -44,17 +46,18 @@ class FullscreenActivity : AppCompatActivity() {
     private val hideRunnable = Runnable { hide() }
 
     /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
+     * Will call another activity to load the main application screen
      */
-    private val delayHideTouchListener = View.OnTouchListener { view, motionEvent ->
+    @SuppressLint("ClickableViewAccessibility")
+    private val startTouchListener = View.OnTouchListener { view, motionEvent ->
         when (motionEvent.action) {
-            MotionEvent.ACTION_DOWN -> if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS)
+            MotionEvent.ACTION_DOWN -> {
+                Toast.makeText(this, getString(R.string.welcome_text), Toast.LENGTH_SHORT).show()
             }
-            MotionEvent.ACTION_UP -> view.performClick()
-            else -> {
+            MotionEvent.ACTION_UP -> {
+                val intent = Intent(this, BiographyPage::class.java).apply {
+                }
+                startActivity(intent);
             }
         }
         false
@@ -78,7 +81,7 @@ class FullscreenActivity : AppCompatActivity() {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById<Button>(R.id.dummy_button).setOnTouchListener(delayHideTouchListener)
+        findViewById<Button>(R.id.dummy_button).setOnTouchListener(startTouchListener)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
