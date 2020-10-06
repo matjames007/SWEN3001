@@ -55,7 +55,7 @@ class FullscreenActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.welcome_text), Toast.LENGTH_SHORT).show()
             }
             MotionEvent.ACTION_UP -> {
-                val intent = Intent(this, BiographyPage::class.java).apply {
+                val intent = Intent(this, BiographyPageActivity::class.java).apply {
                 }
                 startActivity(intent);
             }

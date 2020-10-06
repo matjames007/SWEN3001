@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".BiographyPage"
+            android:name=".BiographyPageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_biography_page"
             android:theme="@style/FullscreenTheme"></activity>
