@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Student Application</string>
+
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_second_name">Second Name</string>
+    <string name="hint_address">Address Line 1\nAddress Line 2</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Student not saved!</string>
+</resources>
