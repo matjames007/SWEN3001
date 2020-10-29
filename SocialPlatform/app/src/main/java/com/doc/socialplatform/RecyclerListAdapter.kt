@@ -24,6 +24,10 @@ class RecyclerListAdapter internal constructor(var context: Context, viewModel: 
         this.posts = viewModel.posts
     }
 
+    companion object {
+        val POST_ID = "POST_ID"
+    }
+
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val imageView: ImageView = itemView.findViewById(R.id.imageView)
@@ -40,6 +44,13 @@ class RecyclerListAdapter internal constructor(var context: Context, viewModel: 
         val current = posts[position]
         holder.titleTextView.text = current.title
         holder.imageView.setImageResource(current.image)
+        holder.imageView.setOnClickListener {
+            var intent = Intent(context, PostViewPage::class.java).apply {
+                putExtra(RecyclerListAdapter.POST_ID, position)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            context.applicationContext.startActivity(intent)
+        }
         holder.description.text = current.description
         holder.share_button.setOnClickListener {
             val shareIntent = Intent().apply {
