@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Sensor Application</string>
+    <string name="temperature">Temperature</string>
+    <string name="pressure">Pressure</string>
+    <string name="proximity">Proximity</string>
+    <string name="humidity">Humidity</string>
+    <string name="light">Light</string>
+    <string name="default_text">Waiting for sensor change...</string>
+</resources>
