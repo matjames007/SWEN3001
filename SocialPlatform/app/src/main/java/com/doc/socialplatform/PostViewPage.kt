@@ -2,9 +2,12 @@ package com.doc.socialplatform
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.doc.socialplatform.model.post.Post
 import com.doc.socialplatform.model.PostViewModel
 import com.doc.socialplatform.model.comment.Comment
@@ -33,11 +36,24 @@ class PostViewPage : AppCompatActivity() {
         val image = findViewById<ImageView>(R.id.mainPostImage)
         val description = findViewById<TextView>(R.id.description)
         val commentButton = findViewById<ImageButton>(R.id.commentButton)
-        val commentTextView = findViewById<EditText>(R.id.commentBox)
+        val commentEditText = findViewById<EditText>(R.id.commentBox)
+        val commentsRecyclerView: RecyclerView = findViewById<RecyclerView>(R.id.commentsList)
+        val adapter = CommentViewListAdapter(this, postViewModel)
+        commentsRecyclerView.adapter = adapter
+        commentsRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        postViewModel.allComments.observe(this, Observer {
+            comments -> comments?.let {
+                adapter.setComments(it)
+                Log.i(this.toString(), "Comment observation triggered")
+            }
+        })
+
         commentButton.setOnClickListener {
-            val commentObject = Comment(0,posts[position].id, commentTextView.text.toString())
+            val commentObject = Comment(0,posts[position].id, commentEditText.text.toString())
             postViewModel.insert(commentObject)
             Toast.makeText(this, "Comment Successfully Added!", Toast.LENGTH_SHORT).show()
+            commentEditText.setText("")
         }
 
         var bundle: Bundle? = intent.extras
@@ -49,5 +65,7 @@ class PostViewPage : AppCompatActivity() {
         titleTextView.text = posts[position].title
         image.setImageResource(posts[position].image)
         description.text = posts[position].description
+
+        postViewModel.setupComments(posts[position].id)
     }
 }

@@ -19,4 +19,8 @@ class CustomRepository(private val postDao: PostDao, private val commentDao: Com
     suspend fun insert(comment: Comment) {
         commentDao.insertComment(comment)
     }
+
+    fun getComments(postId: Int): LiveData<List<Comment>> {
+        return commentDao.getAllCommentsForPost(postId)
+    }
 }

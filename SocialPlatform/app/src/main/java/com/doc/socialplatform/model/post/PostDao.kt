@@ -17,4 +17,7 @@ interface PostDao {
 
     @Query("SELECT * from posts where id=:postId")
     fun getAllPosts(postId: Int): LiveData<List<Post>>
+
+    @Query("DELETE FROM posts")
+    suspend fun deleteAll()
 }
