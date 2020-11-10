@@ -1,28 +1,19 @@
 package com.doc.socialplatform
 
-import android.content.Context
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.doc.socialplatform.model.CustomSensorListener
-import com.doc.socialplatform.model.Post
+import com.doc.socialplatform.model.post.Post
 import com.doc.socialplatform.model.PostViewModel
-import org.w3c.dom.Text
+import com.doc.socialplatform.model.comment.Comment
 
 class PostViewPage : AppCompatActivity() {
 
     private var position: Int = 0
     private var posts: List<Post> = listOf<Post>()
-    private lateinit var sensorListener: CustomSensorListener
-    private var tempSensor: Sensor? = null
-    private lateinit var sensorManager: SensorManager
-    private lateinit var tempView:TextView
+    private lateinit var postViewModel: PostViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,51 +21,24 @@ class PostViewPage : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
-        posts = ViewModelProvider(this).get(PostViewModel::class.java).posts
-        setupScreen()
-        setupSensors()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(tempSensor != null) {
-            sensorManager.registerListener(sensorListener, tempSensor, SensorManager.SENSOR_DELAY_NORMAL)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if(tempSensor != null) {
-            sensorManager.unregisterListener(sensorListener)
-        }
-    }
-
-    private fun setupSensors() {
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
-        Log.i(this.toString(), deviceSensors.toString())
-
-        this.tempSensor = if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
-            sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
-        } else {
-            // Sorry, there are no temperature sensors on your device.
-            null
-        }
-
-        if(tempSensor != null) {
-            sensorListener = CustomSensorListener(tempView, posts[position].temp)
-            sensorManager.registerListener(sensorListener, tempSensor, SensorManager.SENSOR_DELAY_NORMAL)
-        } else {
-            Toast.makeText(this, "No Temperature Sensors Detected!", Toast.LENGTH_SHORT)
-        }
+        postViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
+        postViewModel.allPosts.observe(this, Observer {
+            posts -> this.posts = posts
+            setupScreen()
+        })
     }
 
     private fun setupScreen() {
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
         val image = findViewById<ImageView>(R.id.mainPostImage)
         val description = findViewById<TextView>(R.id.description)
-        tempView = findViewById(R.id.temp_textview)
+        val commentButton = findViewById<ImageButton>(R.id.commentButton)
+        val commentTextView = findViewById<EditText>(R.id.commentBox)
+        commentButton.setOnClickListener {
+            val commentObject = Comment(0,posts[position].id, commentTextView.text.toString())
+            postViewModel.insert(commentObject)
+            Toast.makeText(this, "Comment Successfully Added!", Toast.LENGTH_SHORT).show()
+        }
 
         var bundle: Bundle? = intent.extras
         var index = bundle?.getInt(RecyclerListAdapter.POST_ID)
@@ -82,9 +46,8 @@ class PostViewPage : AppCompatActivity() {
             position = index
         }
 
-        titleTextView.text = posts.get(position).title
-        image.setImageResource(posts.get(position).image)
-        description.text = posts.get(position).description
-        tempView.text = "Temperature ${posts.get(0).temp} degrees Celsius"
+        titleTextView.text = posts[position].title
+        image.setImageResource(posts[position].image)
+        description.text = posts[position].description
     }
 }

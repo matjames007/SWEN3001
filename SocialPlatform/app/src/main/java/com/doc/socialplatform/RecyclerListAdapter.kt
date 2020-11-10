@@ -11,18 +11,13 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.doc.socialplatform.model.Post
+import com.doc.socialplatform.model.post.Post
 import com.doc.socialplatform.model.PostViewModel
 
 class RecyclerListAdapter internal constructor(var context: Context, viewModel: PostViewModel): RecyclerView.Adapter<RecyclerListAdapter.PostViewHolder>(){
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var posts = listOf<Post>()
-
-    init {
-        this.posts = viewModel.posts
-    }
 
     companion object {
         val POST_ID = "POST_ID"
@@ -72,7 +67,7 @@ class RecyclerListAdapter internal constructor(var context: Context, viewModel: 
         }
     }
 
-    internal fun setStudent(posts: List<Post>) {
+    internal fun setPosts(posts: List<Post>) {
         this.posts = posts
         notifyDataSetChanged()
     }

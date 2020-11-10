@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Social Platform</string>
     <string name="share_button_profile">Share Profile</string>
+    <string name="commentPlaceholder">comment....</string>
 </resources>

@@ -18,6 +18,7 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.doc.socialplatform.model.PostViewModel
 import kotlinx.android.synthetic.main.social_page_profile.*
@@ -50,7 +51,10 @@ class ProfilePage : AppCompatActivity() {
         var share_button:Button = findViewById(R.id.share_intent)
         picture = findViewById(R.id.profile_pic)
 
-        picturePostCount.text = "${postViewModel.posts.size} Posts!"
+        postViewModel.allPosts.observe(this, Observer{
+            posts -> picturePostCount.text = "${posts.size} Posts!"
+        })
+
         friendsCount.text = "0 friends!"
         email.text = "matthew.budram02@uwimona.edu.jm"
         contact.text = "(876) XXX-YYYY"
