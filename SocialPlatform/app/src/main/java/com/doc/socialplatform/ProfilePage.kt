@@ -21,7 +21,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.doc.socialplatform.model.PostViewModel
-import kotlinx.android.synthetic.main.social_page_profile.*
 import org.w3c.dom.Text
 
 class ProfilePage : AppCompatActivity() {
@@ -65,7 +64,7 @@ class ProfilePage : AppCompatActivity() {
                 action = MediaStore.ACTION_IMAGE_CAPTURE
             }
             try {
-                startActivityForResult(cameraIntent, ProfilePage.IMAGE_CAPTURE)
+                startActivityForResult(cameraIntent, IMAGE_CAPTURE)
             } catch (e: ActivityNotFoundException) {
                 Log.e(this.toString(), e.toString())
                 Toast.makeText(this, "Unable to launch camera", Toast.LENGTH_SHORT).show()
@@ -88,9 +87,9 @@ class ProfilePage : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(resultCode == Activity.RESULT_OK && requestCode == ProfilePage.IMAGE_CAPTURE) {
+        if(resultCode == RESULT_OK && requestCode == IMAGE_CAPTURE) {
             val image = data?.extras?.get("data") as Bitmap
-            profile_pic.setImageBitmap(image)
+            picture.setImageBitmap(image)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
